@@ -75,3 +75,29 @@
   }
   
 ?>
+
+<!-- WordPress post request -->
+<!-- <?php
+	$remoteURL = "https://jsonplaceholder.typicode.com/posts";
+	
+	$headers = array( 
+		'Content-type' => 'application/json',
+		'charset=UTF-8',
+		// "Authorization: Basic ".$base64encodedData
+		// "Authorization: Bearer ".$token
+	);
+	
+	$postData = array('title' => 'foo', 'body' => 'bar', 'userId' => '1');
+
+	$args = array(
+		'timeout'	=> 20,
+		'headers'	=> $headers,
+		'body' => json_encode($postData)
+	);
+	
+	$response = wp_remote_post( $remoteURL, $args );
+	echo $response.'<br>';
+
+	$json = json_decode($response);
+	echo 'title: '.$json->title.'<br>';  
+?> -->
