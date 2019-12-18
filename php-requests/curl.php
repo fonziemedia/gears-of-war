@@ -43,6 +43,7 @@
 
 	curl_setopt_array($curl, array(
 		CURLOPT_URL => "https://jsonplaceholder.typicode.com/posts",
+		// CURLOPT_URL => "http://user:passwd@www.server.com/index.html",
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_FOLLOWLOCATION => true,
 		CURLOPT_ENCODING => "",
@@ -53,7 +54,9 @@
 		CURLOPT_POSTFIELDS => $data_string,
 		CURLOPT_HTTPHEADER => array(
 			'Content-Type: application/json',
-			'charset=UTF-8'
+			'charset=UTF-8',
+			// "Authorization: Basic ".$base64encodedData
+			// "Authorization: Bearer ".$token
 		),
 	));
 
