@@ -38,6 +38,7 @@
 	$curl = curl_init();
 
 	$obj = array('title' => 'foo', 'body' => 'bar', 'userId' => '1');
+	// error_log( print_r($multidimensionalarray, TRUE) );
 	
 	$data_string = json_encode($obj);
 
@@ -96,6 +97,33 @@
 	);
 	
 	$response = wp_remote_post( $remoteURL, $args );
+	echo $response.'<br>';
+
+	$json = json_decode($response);
+	echo 'title: '.$json->title.'<br>';  
+?> -->
+
+<!-- WordPress remote request (i.e. PUT or DELETE) -->
+<!-- <?php
+	$remoteURL = "https://jsonplaceholder.typicode.com/posts/1";
+	
+	$headers = array( 
+		'Content-type' => 'application/json',
+		'charset=UTF-8',
+		// "Authorization: Basic ".$base64encodedData
+		// "Authorization: Bearer ".$token
+	);
+	
+	$postData = array('title' => 'foo', 'body' => 'bar', 'userId' => '1');
+
+	$args = array(
+		'timeout'	=> 20,
+		'headers'	=> $headers,
+		'body'	=> json_encode($postData),
+		'method'	=> 'PUT'
+	);
+	
+	$response = wp_remote_request( $remoteURL, $args );
 	echo $response.'<br>';
 
 	$json = json_decode($response);
