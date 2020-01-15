@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var customizeForDevice = function() {
+        var ua = navigator.userAgent;
+        var checker = {
+          iphone: ua.match(/(iPhone|iPod|iPad)/),
+          android: ua.match(/Android/)
+        };
+
+        if (checker.android) {
+          window.location = "http://android.com";
+        } else if (checker.iphone) {
+          window.location = "http://iphone.com";
+        } else {
+          window.location = "http://desktop.com";
+        }
+      };
+      customizeForDevice();
+    </script>
+  </body>
+</html>
