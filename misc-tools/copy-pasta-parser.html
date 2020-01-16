@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Le Cenas</title>
+    <style>
+      html,
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .main {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 100%;
+      }
+
+      .result input[type="button"] {
+        color: #fff !important;
+        text-transform: uppercase;
+        text-decoration: none;
+        background: #ed3330;
+        padding: 12px;
+        border-radius: 5px;
+        display: inline-block;
+        border: none;
+        transition: all 0.4s ease 0s;
+      }
+
+      .result input[type="button"]:hover {
+        background: #434343;
+        letter-spacing: 1px;
+        -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+        -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+        box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
+        transition: all 0.4s ease 0s;
+      }
+
+      .result #textOutput {
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="input">
+        <h3>Le Parser</h3>
+        <textarea
+          type="text"
+          id="textInput"
+          rows="8"
+          placeholder="Enter some text"
+          cols="50"
+        ></textarea>
+      </div>
+      <div class="result">
+        <h3>Le result</h3>
+        <div id="textOutput"></div>
+        <br />
+        <input
+          type="button"
+          value="Copy to clipboard"
+          class="button"
+          onclick="copyToClipboard(event)"
+        />
+      </div>
+    </div>
+  </body>
+  <script>
+    var textInput = document.getElementById("textInput");
+    var textOutput = document.getElementById("textOutput"),
+      copyToClipboard;
+    window.onload = function(params) {
+      textInput.addEventListener(
+        "input",
+        function() {
+          // console.log(textInput.value);
+          var parsedInput = "";
+          parsedInput = textInput.value.replace(/\n/g, "%");
+          parsedInput = parsedInput.replace(/\s+/g, "-");
+          // console.log(parsedInput);
+          textOutput.innerHTML = parsedInput;
+        },
+        false
+      );
+
+      copyToClipboard = function(e) {
+        // note: this doesn't work with <input> or <textarea> elements
+        e.preventDefault();
+
+        var range, selection, worked;
+
+        if (document.body.createTextRange) {
+          range = document.body.createTextRange();
+          range.moveToElementText(textOutput);
+          range.select();
+        } else if (window.getSelection) {
+          selection = window.getSelection();
+          range = document.createRange();
+          range.selectNodeContents(textOutput);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+
+        try {
+          document.execCommand("copy");
+          alert("text copied");
+          if (window.getSelection) selection.removeAllRanges();
+        } catch (err) {
+          alert("unable to copy text");
+        }
+      };
+    };
+  </script>
+</html>
